@@ -1,0 +1,119 @@
+<script src="js/jquery-1.7.1.min.js" language="JavaScript" type="text/javascript"></script>
+<script src="../guide/jquery.guide.js" language="JavaScript" type="text/javascript"></script>
+<script>
+    $(document).bind('guide.all_loaded', function() {
+        if ($('.guide_layer').length > 0) {
+            if (!$('.guide_layer').is(':visible'))
+                $('#disable_tips').hide();
+            else
+                $('#enable_tips').hide();
+            $('#tips_btn_block').show();
+
+            $('#toggle_tips').click(function(e) {
+                e.preventDefault();
+                if ($('#enable_tips').is(':visible')) {
+                    $('.guide_layer').fadeIn('slow');
+                } else {
+                    $('.guide_layer').fadeOut('slow');
+                }
+                $(this).find('.toggle_btn').toggle();
+            });
+        }
+    });
+
+    $(function() {
+        $('#object_with_guide').guide({
+            imagesPath: '../guide/img/'
+        });
+        $('#disable_tips').guide({
+            imagesPath: '../guide/img/',
+            highlightImageName: null
+        });
+        $('.reader p:first').guide({
+            imagesPath: '../guide/img/',
+            highlightImageName: null,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'left'
+        });
+        $('.reader p:last').guide({
+            imagesPath: '../guide/img/',
+            highlightImageName: null,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            helptextOffset: {left: 410},
+            helptextDimensions: {width: 150},
+            text: 'Custom text from guide setting'
+        });
+        $(document).trigger('guide.all_loaded');
+    });
+</script>
+<style>
+/* guide */
+@font-face {
+    font-family: 'JakobCTTRegular';
+    src: url('fonts/jakobctt_regular-webfont.eot');
+    src: url('fonts/jakobctt_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/jakobctt_regular-webfont.woff') format('woff'),
+         url('fonts/jakobctt_regular-webfont.ttf') format('truetype'),
+         url('fonts/jakobctt_regular-webfont.svg#JakobCTTRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+#tips_btn_block {
+    border-radius: 40px 0 0;
+    -moz-border-radius: 40px 0 0;
+    -webkit-border-radius: 40px 0 0;
+    box-shadow: 0px 0px 15px #666;
+    -moz-box-shadow: 0px 0px 15px #666;
+    -webkit-box-shadow: 0px 0px 15px #666;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+}
+#toggle_tips {
+    display: block;
+    padding: 12px 10px 5px 15px;
+    color: #666;
+}
+#toggle_tips:hover {
+    text-decoration: none;
+}
+#toggle_tips:hover .text {
+    text-decoration: underline;
+}
+#enable_tips {
+    font-size: 24px;
+}
+.helptext {
+    color: #D33;
+    font-weight: normal;
+    font-size: 20px;
+    font-family: JakobCTTRegular;
+    text-decoration: none;
+}
+
+/* Custom helptext styles */
+#object_with_guide .helptext {
+    width: 150px;
+}
+</style>
+
+<div style="width: 400px; margin: 100 auto;">
+    <div id="object_with_guide" title="Help text from title attribute" style="width: 60px;">
+        Глава 1.
+    </div>
+    <div class="reader">
+        <p title="Paragraph #1" style="width: 200px;">Проблема появляется</p>
+        <p><br></p>
+        <p>Еще в училище наш куратор, славной памяти Андрей Михайлович, постоянно талдычил: Кирилл, ты слишком добрый, когда-нибудь это выйдет тебе боком. И дай бог, чтобы проблема нашла тебя, когда ты будешь подальше от узкоглазых.</p>
+    </div>
+</div>
+
+
+<div id="tips_btn_block" style="display: none;">
+    <a href="#" id="toggle_tips">
+        <span class="toggle_btn" id="disable_tips" title="Disable tips"><span class="text">Disable tips</span></span>
+        <span class="toggle_btn" id="enable_tips">?</span>
+    </a>
+</div>
