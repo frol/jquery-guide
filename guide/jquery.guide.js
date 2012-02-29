@@ -14,7 +14,7 @@
         extra_id: null
     };
 
-    $.fn.guides = function(settings) {
+    $.fn.guide = function(settings) {
         settings = jQuery.extend(settings, jQuery.extend({}, defaultSettings, settings));
 
         this.each(function() {
